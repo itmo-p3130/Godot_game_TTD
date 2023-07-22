@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://phomkf7yua22"]
+
+[ext_resource type="Texture2D" uid="uid://cqdatlibk8rkx" path="res://sprites/Slime.png" id="1_rur67"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_klvup"]
+size = Vector2(16, 16)
+
+[node name="Node" type="Node"]
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(16, 0)
+texture = ExtResource("1_rur67")
+metadata/_edit_group_ = true
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Sprite2D2"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D2/StaticBody2D"]
+shape = SubResource("RectangleShape2D_klvup")
