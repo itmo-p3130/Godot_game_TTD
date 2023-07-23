@@ -1,19 +1,28 @@
-[gd_scene load_steps=3 format=3 uid="uid://blcxxsnsryudd"]
+[gd_scene load_steps=4 format=3 uid="uid://dms5i52pasmhu"]
 
-[ext_resource type="Texture2D" uid="uid://cqdatlibk8rkx" path="res://sprites/Slime.png" id="1_mpi7s"]
+[ext_resource type="Texture2D" uid="uid://cqdatlibk8rkx" path="res://sprites/Slime.png" id="1_bih00"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_nsr7o"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_pg7he"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_bih00")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8y04e"]
 size = Vector2(14, 14)
 
-[node name="Node" type="Node"]
+[node name="Player" type="CharacterBody2D"]
 
-[node name="Player" type="CharacterBody2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_pg7he")
 
-[node name="Sprite2D" type="Sprite2D" parent="Player"]
-texture = ExtResource("1_mpi7s")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_8y04e")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
-shape = SubResource("RectangleShape2D_nsr7o")
-
-[node name="Camera2D" type="Camera2D" parent="Player"]
+[node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2, 2)
