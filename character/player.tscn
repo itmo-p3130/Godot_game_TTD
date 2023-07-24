@@ -1,28 +1,137 @@
-[gd_scene load_steps=4 format=3 uid="uid://dms5i52pasmhu"]
+[gd_scene load_steps=12 format=3 uid="uid://dms5i52pasmhu"]
 
-[ext_resource type="Texture2D" uid="uid://cqdatlibk8rkx" path="res://sprites/Slime.png" id="1_bih00"]
+[ext_resource type="Texture2D" uid="uid://d2lwbpuhjdb17" path="res://sprites/woodcutter/Woodcutter_idle.png" id="2_f5ero"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ypdhg"]
+atlas = ExtResource("2_f5ero")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gb3ln"]
+atlas = ExtResource("2_f5ero")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wn0tx"]
+atlas = ExtResource("2_f5ero")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1xys3"]
+atlas = ExtResource("2_f5ero")
+region = Rect2(144, 0, 48, 48)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_pg7he"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_bih00")
+"texture": SubResource("AtlasTexture_ypdhg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gb3ln")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wn0tx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1xys3")
 }],
 "loop": true,
-"name": &"default",
-"speed": 5.0
+"name": &"idle",
+"speed": 10.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_8y04e"]
-size = Vector2(14, 14)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kc1ky"]
+radius = 6.0
+height = 32.0
+
+[sub_resource type="Animation" id="Animation_6t7nt"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_6vvq1"]
+resource_name = "idle"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_f5ero")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_q4rwd"]
+_data = {
+"RESET": SubResource("Animation_6t7nt"),
+"idle": SubResource("Animation_6vvq1")
+}
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_3fepv"]
 
 [node name="Player" type="CharacterBody2D"]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+visible = false
 sprite_frames = SubResource("SpriteFrames_pg7he")
+animation = &"idle"
+autoplay = "idle"
+frame = 3
+frame_progress = 0.745292
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_8y04e")
+position = Vector2(-8, 8)
+shape = SubResource("CapsuleShape2D_kc1ky")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2, 2)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_f5ero")
+hframes = 4
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_q4rwd")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_3fepv")
+anim_player = NodePath("../AnimationPlayer")
