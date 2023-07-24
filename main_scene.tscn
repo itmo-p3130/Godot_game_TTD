@@ -1,0 +1,31 @@
+[gd_scene load_steps=7 format=3 uid="uid://cmljpearmn7pb"]
+
+[ext_resource type="Texture2D" uid="uid://cqdatlibk8rkx" path="res://sprites/Slime.png" id="1_wvjyf"]
+[ext_resource type="Script" path="res://character/player.gd" id="3_01an7"]
+[ext_resource type="PackedScene" uid="uid://dms5i52pasmhu" path="res://character/player.tscn" id="3_mvg86"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_aqd1j"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ep347"]
+texture = ExtResource("1_wvjyf")
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="TileSet" id="TileSet_wqyd6"]
+physics_layer_0/collision_layer = 1
+physics_layer_0/physics_material = SubResource("PhysicsMaterial_aqd1j")
+sources/0 = SubResource("TileSetAtlasSource_ep347")
+
+[node name="Main_scene" type="Node2D"]
+
+[node name="TileMap" type="TileMap" parent="."]
+position = Vector2(24, 32)
+tile_set = SubResource("TileSet_wqyd6")
+format = 2
+layer_0/tile_data = PackedInt32Array(65530, 0, 0, 65531, 0, 0, 65532, 0, 0, 0, 0, 0, 1, 0, 0, 2, 0, 0, -65533, 0, 0, -131068, 0, 0, -11, 0, 0, -10, 0, 0, -9, 0, 0, -8, 0, 0, -7, 0, 0, -131067, 0, 0, -65546, 0, 0, -65547, 0, 0, -65548, 0, 0, -65549, 0, 0, -13, 0, 0, -14, 0, 0, -15, 0, 0, -16, 0, 0, -131066, 0, 0, -196601, 0, 0, -196600, 0, 0, -131064, 0, 0, -131063, 0, 0, -65527, 0, 0, -65526, 0, 0, 10, 0, 0, 11, 0, 0, 12, 0, 0, 13, 0, 0, -262133, 0, 0, -262132, 0, 0, -262131, 0, 0, -262130, 0, 0, -327678, 0, 0, -327679, 0, 0, -327680, 0, 0, -262145, 0, 0, -262153, 0, 0, -262152, 0, 0, -262151, 0, 0, -393220, 0, 0, -393221, 0, 0, -327692, 0, 0, -327693, 0, 0, -327694, 0, 0, -327695, 0, 0, -327696, 0, 0, -458746, 0, 0, -458745, 0, 0, -458744, 0, 0, 65533, 0, 0, 65535, 0, 0, 65534, 0, 0, -196614, 0, 0)
+
+[node name="Player" parent="." instance=ExtResource("3_mvg86")]
+position = Vector2(-48, 8)
+script = ExtResource("3_01an7")
