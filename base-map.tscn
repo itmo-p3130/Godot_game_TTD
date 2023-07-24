@@ -125,7 +125,6 @@ metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
 rotation = -0.0529715
-scale = Vector2(1, 1)
 shape = SubResource("CircleShape2D_0qlgc")
 metadata/_edit_lock_ = true
 
