@@ -1,0 +1,5 @@
+pydrive2==1.16.1
+appdirs==1.4.4
+fsspec==2023.6.0
+funcy==2.0
+tqdm==4.65.0
