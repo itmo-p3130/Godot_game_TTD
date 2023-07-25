@@ -4,3 +4,4 @@ res
 *.png
 client_secrets.json
 my-credentials.txt
+*.tmp
