@@ -1,14 +1,23 @@
+from concurrent.futures import ThreadPoolExecutor
 from pydrive2.auth import GoogleAuth
 from pydrive2.drive import GoogleDrive
 from pydrive2.fs import GDriveFileSystem
 import os
-import copy
 import shutil
 
 
 CACHED_CREDENTIALS_FILE = "my-credentials.txt"
-REMOTE_RESOURCES_PATH = "ttd/Sprites"
+REMOTE_RESOURCES_DIRECTORY_ID = "16TJ1uuazJBxXJ5jGZ0OTb3gwx2un5yTC"
 LOCAL_RESOURCES_PATH = "res"
+
+
+def download_file(args):
+    remote_path, local_path = args
+    print(f"Downloading {local_path} ...")
+
+    file_id = fs._get_item_id(REMOTE_RESOURCES_DIRECTORY_ID + "/" + remote_path)
+    file = drive.CreateFile({ "id": file_id })
+    file.GetContentFile(local_path)
 
 
 gauth = GoogleAuth()
@@ -26,32 +35,31 @@ gauth.SaveCredentialsFile(CACHED_CREDENTIALS_FILE)
 
 drive = GoogleDrive(gauth)
 
-fs = GDriveFileSystem("root", google_auth=gauth)
+fs = GDriveFileSystem(REMOTE_RESOURCES_DIRECTORY_ID, google_auth=gauth)
 
 if (os.path.isdir(LOCAL_RESOURCES_PATH) and
-    input(f"Delete local {LOCAL_RESOURCES_PATH} folder with all of it's content? ") == "YES" and
-    input("Are you sure? ") == "YES"):
+    input(f"Delete local {LOCAL_RESOURCES_PATH} folder with all of it's content? (Print YES) ") == "YES" and
+    input("Are you sure? (Print YES) ") == "YES"):
         shutil.rmtree(LOCAL_RESOURCES_PATH)
 
 os.makedirs(LOCAL_RESOURCES_PATH)
 
-path_length = len(REMOTE_RESOURCES_PATH.split("/"))
-dirs = ["/" + REMOTE_RESOURCES_PATH]
-while len(dirs) > 0:
-    dirs_copy = copy.copy(dirs)
-    dirs = []
-    for dir in dirs_copy:
-        for root, dnames, fnames in fs.walk(dir):
-            # print(root)
-            local_root = LOCAL_RESOURCES_PATH + "/" + "/".join(root.split("/")[path_length:])
+downloader = ThreadPoolExecutor(4)
+for root, dnames, fnames in fs.walk("."):
+    path_filter = lambda x: x not in ["", "."]
 
-            print(f"Creating {local_root} ...")
-            os.makedirs(local_root)
+    root = list(filter(path_filter, root.split("/")))
+    local_root = list(filter(path_filter,
+                             [LOCAL_RESOURCES_PATH, *root]))
 
-            for dname in dnames:
-                dirs.append(dir + "/" + dname)
+    for dname in dnames:
+        path = "/".join(local_root + [dname])
+        print(f"Creating {path} ...")
 
-            for fname in fnames:
-                print(f"Downloading {fname}...")
-                file = drive.ListFile({'q': f"title = '{fname}'"}).GetList()[0]
-                file.GetContentFile(local_root + "/" + fname)
+        os.makedirs(path)
+
+    for fname in fnames:
+        remote_path = "/".join(root + [fname])
+        local_path = "/".join(local_root + [fname])
+
+        downloader.submit(download_file, [remote_path, local_path])
