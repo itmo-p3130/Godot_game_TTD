@@ -1,7 +1,8 @@
-[gd_scene load_steps=20 format=3]
+[gd_scene load_steps=21 format=3 uid="uid://kjrkrb6rxg16"]
 
-[ext_resource type="Texture2D" path="res://models/player/Woodcutter_idle.png" id="2_f5ero"]
-[ext_resource type="Texture2D" path="res://models/player/Woodcutter_run.png" id="2_n22hm"]
+[ext_resource type="Script" path="res://characters/player/player.gd" id="1_n5wlj"]
+[ext_resource type="Texture2D" uid="uid://cf6vfi4ppmwae" path="res://models/player/Woodcutter_idle.png" id="2_f5ero"]
+[ext_resource type="Texture2D" uid="uid://dxpagcrs3qlxj" path="res://models/player/Woodcutter_run.png" id="2_n22hm"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ypdhg"]
 atlas = ExtResource("2_f5ero")
@@ -197,6 +198,7 @@ _data = {
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_3fepv"]
 
 [node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_n5wlj")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 visible = false
