@@ -1,7 +1,7 @@
-[gd_scene load_steps=20 format=3]
+[gd_scene load_steps=25 format=3 uid="uid://p5i5hffyqs85"]
 
-[ext_resource type="Texture2D" path="res://models/player/Woodcutter_idle.png" id="2_f5ero"]
-[ext_resource type="Texture2D" path="res://models/player/Woodcutter_run.png" id="2_n22hm"]
+[ext_resource type="Texture2D" uid="uid://bd8kbguta6ld7" path="res://models/player/Woodcutter_idle.png" id="2_f5ero"]
+[ext_resource type="Texture2D" uid="uid://ffu88fw33rgg" path="res://models/player/Woodcutter_run.png" id="2_n22hm"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ypdhg"]
 atlas = ExtResource("2_f5ero")
@@ -83,7 +83,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"run",
-"speed": 5.0
+"speed": 10.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kc1ky"]
@@ -194,14 +194,39 @@ _data = {
 "run": SubResource("Animation_rp71s")
 }
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_7k56o"]
+animation = &"idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_jhkem"]
+animation = &"run"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_u125y"]
+animation = &"run"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_al8vr"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_7k56o")
+blend_point_0/pos = 0.0
+blend_point_1/node = SubResource("AnimationNodeAnimation_jhkem")
+blend_point_1/pos = -1.0
+blend_point_2/node = SubResource("AnimationNodeAnimation_u125y")
+blend_point_2/pos = 1.0
+blend_mode = 1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_8yni7"]
+advance_mode = 2
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_3fepv"]
+states/Move/node = SubResource("AnimationNodeBlendSpace1D_al8vr")
+states/Move/position = Vector2(349, 82)
+states/Start/position = Vector2(140, 82)
+transitions = ["Start", "Move", SubResource("AnimationNodeStateMachineTransition_8yni7")]
 
 [node name="Player" type="CharacterBody2D"]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 visible = false
 sprite_frames = SubResource("SpriteFrames_pg7he")
-animation = &"idle"
+animation = &"run"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -212,8 +237,8 @@ shape = SubResource("CapsuleShape2D_kc1ky")
 zoom = Vector2(2, 2)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_n22hm")
-hframes = 6
+texture = ExtResource("2_f5ero")
+hframes = 4
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -223,3 +248,4 @@ libraries = {
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeStateMachine_3fepv")
 anim_player = NodePath("../AnimationPlayer")
+parameters/Move/blend_position = -0.00161552
