@@ -1,7 +1,8 @@
-[gd_scene load_steps=25 format=3 uid="uid://p5i5hffyqs85"]
+[gd_scene load_steps=26 format=3 uid="uid://p5i5hffyqs85"]
 
 [ext_resource type="Texture2D" uid="uid://bd8kbguta6ld7" path="res://models/player/Woodcutter_idle.png" id="2_f5ero"]
 [ext_resource type="Texture2D" uid="uid://ffu88fw33rgg" path="res://models/player/Woodcutter_run.png" id="2_n22hm"]
+[ext_resource type="Script" path="res://characters/player/CharacterStateMachine.gd" id="3_dyjpj"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ypdhg"]
 atlas = ExtResource("2_f5ero")
@@ -249,3 +250,6 @@ libraries = {
 tree_root = SubResource("AnimationNodeStateMachine_3fepv")
 anim_player = NodePath("../AnimationPlayer")
 parameters/Move/blend_position = -0.00161552
+
+[node name="CharacterStateMachine" type="Node" parent="."]
+script = ExtResource("3_dyjpj")
