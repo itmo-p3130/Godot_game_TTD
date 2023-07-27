@@ -1,7 +1,7 @@
 class_name CharacterStateMachine
 extends Node
 
-@export var states : Array[State]
+var states : Array[State]
 
 func _read():
 	for child in get_children():

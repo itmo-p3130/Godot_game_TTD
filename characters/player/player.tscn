@@ -265,3 +265,4 @@ script = ExtResource("5_ywbnm")
 
 [node name="Landing" type="Node" parent="CharacterStateMachine"]
 script = ExtResource("6_g3pxe")
+can_move = false
