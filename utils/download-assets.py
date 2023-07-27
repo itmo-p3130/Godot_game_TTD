@@ -7,8 +7,8 @@ import shutil
 
 
 CACHED_CREDENTIALS_FILE = "my-credentials.txt"
-REMOTE_RESOURCES_DIRECTORY_ID = "16TJ1uuazJBxXJ5jGZ0OTb3gwx2un5yTC"
-LOCAL_RESOURCES_PATH = "res"
+REMOTE_RESOURCES_DIRECTORY_ID = "1cSfAusfRTaaW_-SmreXLa-54SjN_2eN6"
+LOCAL_RESOURCES_PATH = "models"
 
 
 def download_file(args):

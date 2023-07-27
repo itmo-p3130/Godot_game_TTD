@@ -1,7 +1,13 @@
-# Godot 4+ specific ignores
+# Godot
 .godot/
-res
-*.png
+*.import
+
+# Game
+models
+
+# Assets downloading script
 client_secrets.json
 my-credentials.txt
+
+# Other
 *.tmp

@@ -1,7 +1,7 @@
-[gd_scene load_steps=20 format=3 uid="uid://dms5i52pasmhu"]
+[gd_scene load_steps=20 format=3]
 
-[ext_resource type="Texture2D" uid="uid://d2lwbpuhjdb17" path="res://sprites/woodcutter/Woodcutter_idle.png" id="2_f5ero"]
-[ext_resource type="Texture2D" uid="uid://dyfoekukgfpti" path="res://sprites/woodcutter/Woodcutter_run.png" id="2_n22hm"]
+[ext_resource type="Texture2D" path="res://models/player/Woodcutter_idle.png" id="2_f5ero"]
+[ext_resource type="Texture2D" path="res://models/player/Woodcutter_run.png" id="2_n22hm"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ypdhg"]
 atlas = ExtResource("2_f5ero")
