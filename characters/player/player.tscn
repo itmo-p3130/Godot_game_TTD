@@ -254,8 +254,9 @@ tree_root = SubResource("AnimationNodeStateMachine_3fepv")
 anim_player = NodePath("../AnimationPlayer")
 parameters/Move/blend_position = -0.00161552
 
-[node name="CharacterStateMachine" type="Node" parent="."]
+[node name="CharacterStateMachine" type="Node" parent="." node_paths=PackedStringArray("current_state")]
 script = ExtResource("3_uym7n")
+current_state = NodePath("Ground")
 
 [node name="Ground" type="Node" parent="CharacterStateMachine"]
 script = ExtResource("4_d8gkr")
