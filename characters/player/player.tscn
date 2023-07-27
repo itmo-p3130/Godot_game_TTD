@@ -1,8 +1,11 @@
-[gd_scene load_steps=26 format=3 uid="uid://p5i5hffyqs85"]
+[gd_scene load_steps=29 format=3 uid="uid://p5i5hffyqs85"]
 
 [ext_resource type="Texture2D" uid="uid://bd8kbguta6ld7" path="res://models/player/Woodcutter_idle.png" id="2_f5ero"]
 [ext_resource type="Texture2D" uid="uid://ffu88fw33rgg" path="res://models/player/Woodcutter_run.png" id="2_n22hm"]
 [ext_resource type="Script" path="res://characters/CharacterStateMachine.gd" id="3_uym7n"]
+[ext_resource type="Script" path="res://characters/player/GroundState.gd" id="4_d8gkr"]
+[ext_resource type="Script" path="res://characters/player/AirState.gd" id="5_ywbnm"]
+[ext_resource type="Script" path="res://characters/player/LandingState.gd" id="6_g3pxe"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ypdhg"]
 atlas = ExtResource("2_f5ero")
@@ -253,3 +256,12 @@ parameters/Move/blend_position = -0.00161552
 
 [node name="CharacterStateMachine" type="Node" parent="."]
 script = ExtResource("3_uym7n")
+
+[node name="Ground" type="Node" parent="CharacterStateMachine"]
+script = ExtResource("4_d8gkr")
+
+[node name="Air" type="Node" parent="CharacterStateMachine"]
+script = ExtResource("5_ywbnm")
+
+[node name="Landing" type="Node" parent="CharacterStateMachine"]
+script = ExtResource("6_g3pxe")
