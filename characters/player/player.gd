@@ -5,7 +5,6 @@ extends CharacterBody2D
 @export var jump_velocity : float = -400.0
 
 @onready var sprite : Sprite2D = $Sprite2D
-@onready var animated_sprite : AnimatedSprite2D = $AnimatedSprite2D
 @onready var animation_tree : AnimationTree = $AnimationTree
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
@@ -40,14 +39,9 @@ func _physics_process(delta):
 func updatte_animation():
 	animation_tree.set("parameters/Move/blend_position", direction.x)
 	
-	if not animation_locked:
-		if direction.x != 0:
-			animated_sprite.play("run")
-		else:
-			animated_sprite.play("idle")
 			
 func update_facing_direction():
 	if direction.x > 0:
-		animated_sprite.flip_h = false
+		sprite.flip_h = false
 	elif direction.x < 0:
-		animated_sprite.flip_h = true
+		sprite.flip_h = true
