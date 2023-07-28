@@ -1,11 +1,13 @@
-[gd_scene load_steps=29 format=3 uid="uid://p5i5hffyqs85"]
+[gd_scene load_steps=31 format=3 uid="uid://p5i5hffyqs85"]
 
+[ext_resource type="Script" path="res://characters/player/Player.gd" id="1_dttdu"]
 [ext_resource type="Texture2D" uid="uid://bd8kbguta6ld7" path="res://models/player/Woodcutter_idle.png" id="2_f5ero"]
 [ext_resource type="Texture2D" uid="uid://ffu88fw33rgg" path="res://models/player/Woodcutter_run.png" id="2_n22hm"]
 [ext_resource type="Script" path="res://characters/CharacterStateMachine.gd" id="3_uym7n"]
 [ext_resource type="Script" path="res://characters/player/GroundState.gd" id="4_d8gkr"]
 [ext_resource type="Script" path="res://characters/player/AirState.gd" id="5_ywbnm"]
 [ext_resource type="Script" path="res://characters/player/LandingState.gd" id="6_g3pxe"]
+[ext_resource type="Script" path="res://characters/player/StateDebugLabel.gd" id="8_6vfwu"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ypdhg"]
 atlas = ExtResource("2_f5ero")
@@ -226,6 +228,7 @@ states/Start/position = Vector2(140, 82)
 transitions = ["Start", "Move", SubResource("AnimationNodeStateMachineTransition_8yni7")]
 
 [node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_dttdu")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 visible = false
@@ -269,3 +272,12 @@ script = ExtResource("5_ywbnm")
 [node name="Landing" type="Node" parent="CharacterStateMachine"]
 script = ExtResource("6_g3pxe")
 can_move = false
+
+[node name="StateDebugLabel" type="Label" parent="." node_paths=PackedStringArray("state_machine")]
+offset_left = -57.0
+offset_top = -33.0
+offset_right = 41.0
+offset_bottom = -7.0
+text = "State: "
+script = ExtResource("8_6vfwu")
+state_machine = NodePath("../CharacterStateMachine")
