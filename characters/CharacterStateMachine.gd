@@ -19,6 +19,9 @@ func _physics_process(delta):
 		switch_states(current_state.next_state)
 	current_state.state_process(delta)
 
+func _input(event : InputEvent):
+	current_state.state_input(event)
+	
 func check_if_can_move():
 	return current_state.can_move
 
@@ -28,6 +31,3 @@ func switch_states(new_state : State):
 		current_state.next_state = null
 	current_state = new_state
 	current_state.on_enter()
-	
-func _input(event : InputEvent):
-	current_state.state_input(event)
