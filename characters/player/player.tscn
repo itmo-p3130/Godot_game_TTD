@@ -258,7 +258,7 @@ shape = SubResource("RectangleShape2D_rsjcf")
 zoom = Vector2(2, 2)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("4_pxruy")
+texture = ExtResource("2_n22hm")
 hframes = 6
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

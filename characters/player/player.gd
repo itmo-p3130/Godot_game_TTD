@@ -37,5 +37,7 @@ func update_animation_parameters():
 func update_facing_direction():
 	if direction.x > 0:
 		sprite.flip_h = false
+		sprite.offset = Vector2(0, 0)
 	elif direction.x < 0:
 		sprite.flip_h = true
+		sprite.offset = Vector2(-15, 0)
