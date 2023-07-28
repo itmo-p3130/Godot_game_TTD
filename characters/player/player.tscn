@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://p5i5hffyqs85"]
+[gd_scene load_steps=40 format=3 uid="uid://p5i5hffyqs85"]
 
 [ext_resource type="Script" path="res://characters/player/Player.gd" id="1_dttdu"]
 [ext_resource type="Texture2D" uid="uid://bd8kbguta6ld7" path="res://models/player/Woodcutter_idle.png" id="2_f5ero"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://characters/player/GroundState.gd" id="4_d8gkr"]
 [ext_resource type="Texture2D" uid="uid://pyy52bduvga7" path="res://models/player/Woodcutter_jump.png" id="4_pxruy"]
 [ext_resource type="Script" path="res://characters/player/AirState.gd" id="5_ywbnm"]
+[ext_resource type="Script" path="res://characters/State.gd" id="6_dimlk"]
 [ext_resource type="Script" path="res://characters/player/LandingState.gd" id="6_g3pxe"]
 [ext_resource type="Script" path="res://characters/player/StateDebugLabel.gd" id="8_6vfwu"]
 
@@ -236,7 +237,8 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id="Animation_qwjnw"]
 resource_name = "jump_end"
-length = 0.3
+length = 0.15
+step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -268,7 +270,7 @@ tracks/2/path = NodePath("Sprite2D:frame")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2),
+"times": PackedFloat32Array(0, 0.05, 0.1),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [2, 3, 4]
@@ -319,14 +321,14 @@ switch_mode = 2
 advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_3fepv"]
-states/End/position = Vector2(904, 237)
+states/End/position = Vector2(911, 172)
 states/Move/node = SubResource("AnimationNodeBlendSpace1D_al8vr")
-states/Move/position = Vector2(375, 325)
-states/Start/position = Vector2(157, 325)
+states/Move/position = Vector2(383, 172)
+states/Start/position = Vector2(165, 172)
 states/jump_end/node = SubResource("AnimationNodeAnimation_jsa4o")
-states/jump_end/position = Vector2(585, 205)
+states/jump_end/position = Vector2(593, 52)
 states/jump_start/node = SubResource("AnimationNodeAnimation_aoepg")
-states/jump_start/position = Vector2(375, 205)
+states/jump_start/position = Vector2(383, 52)
 transitions = ["Start", "Move", SubResource("AnimationNodeStateMachineTransition_8yni7"), "Move", "jump_start", SubResource("AnimationNodeStateMachineTransition_s1rdu"), "jump_start", "jump_end", SubResource("AnimationNodeStateMachineTransition_mrw7b"), "jump_end", "Move", SubResource("AnimationNodeStateMachineTransition_ibcve")]
 
 [node name="Player" type="CharacterBody2D"]
@@ -359,22 +361,24 @@ tree_root = SubResource("AnimationNodeStateMachine_3fepv")
 anim_player = NodePath("../AnimationPlayer")
 parameters/Move/blend_position = -0.00161552
 
-[node name="CharacterStateMachine" type="Node" parent="." node_paths=PackedStringArray("character", "current_state")]
+[node name="CharacterStateMachine" type="Node" parent="." node_paths=PackedStringArray("character", "current_state", "animation_tree")]
 script = ExtResource("3_uym7n")
 character = NodePath("..")
 current_state = NodePath("Ground")
+animation_tree = NodePath("../AnimationTree")
 
 [node name="Ground" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("air_state")]
 script = ExtResource("4_d8gkr")
 air_state = NodePath("../Air")
 
-[node name="Air" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("ground_state")]
-script = ExtResource("5_ywbnm")
-ground_state = NodePath("../Ground")
-
-[node name="Landing" type="Node" parent="CharacterStateMachine"]
+[node name="Landing" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("ground_state")]
 script = ExtResource("6_g3pxe")
+ground_state = NodePath("../Ground")
 can_move = false
+
+[node name="Air" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("landing_state")]
+script = ExtResource("5_ywbnm")
+landing_state = NodePath("../Landing")
 
 [node name="StateDebugLabel" type="Label" parent="." node_paths=PackedStringArray("state_machine")]
 offset_left = -57.0
@@ -384,3 +388,8 @@ offset_bottom = -7.0
 text = "State: "
 script = ExtResource("8_6vfwu")
 state_machine = NodePath("../CharacterStateMachine")
+
+[node name="AbstarctState" type="Node" parent="."]
+script = ExtResource("6_dimlk")
+
+[connection signal="animation_finished" from="AnimationTree" to="CharacterStateMachine/Landing" method="_on_animation_tree_animation_finished"]

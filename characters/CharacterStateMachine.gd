@@ -3,14 +3,17 @@ extends Node
 
 @export var character : CharacterBody2D
 @export var current_state : State
+@export var animation_tree : AnimationTree
 
 var states : Array[State]
+
 
 func _ready():
 	for child_state in get_children():
 		if child_state is State:
 			states.append(child_state)
 			child_state.character = character
+			child_state.playback = animation_tree["parameters/playback"]
 		else:
 			push_warning("Chiled " + child_state.name + " is not a State for CharacterStateMachine")
 
