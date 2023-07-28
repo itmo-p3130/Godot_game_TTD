@@ -94,9 +94,8 @@ animations = [{
 "speed": 10.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kc1ky"]
-radius = 6.0
-height = 32.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rsjcf"]
+size = Vector2(16, 32)
 
 [sub_resource type="Animation" id="Animation_6t7nt"]
 length = 0.001
@@ -342,13 +341,13 @@ autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-8, 8)
-shape = SubResource("CapsuleShape2D_kc1ky")
+shape = SubResource("RectangleShape2D_rsjcf")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2, 2)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("4_pxruy")
+texture = ExtResource("2_n22hm")
 hframes = 6
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
