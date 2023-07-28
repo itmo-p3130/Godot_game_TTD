@@ -221,7 +221,7 @@ advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_3fepv"]
 states/Move/node = SubResource("AnimationNodeBlendSpace1D_al8vr")
-states/Move/position = Vector2(349, 82)
+states/Move/position = Vector2(348, 82)
 states/Start/position = Vector2(140, 82)
 transitions = ["Start", "Move", SubResource("AnimationNodeStateMachineTransition_8yni7")]
 
@@ -254,8 +254,9 @@ tree_root = SubResource("AnimationNodeStateMachine_3fepv")
 anim_player = NodePath("../AnimationPlayer")
 parameters/Move/blend_position = -0.00161552
 
-[node name="CharacterStateMachine" type="Node" parent="." node_paths=PackedStringArray("current_state")]
+[node name="CharacterStateMachine" type="Node" parent="." node_paths=PackedStringArray("character", "current_state")]
 script = ExtResource("3_uym7n")
+character = NodePath("..")
 current_state = NodePath("Ground")
 
 [node name="Ground" type="Node" parent="CharacterStateMachine"]
