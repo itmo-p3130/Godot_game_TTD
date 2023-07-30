@@ -11,6 +11,7 @@ texture = ExtResource("3_1otgx")
 0:0/0 = 0
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:0/0/physics_layer_0/angular_velocity = 0.0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
 [sub_resource type="TileSet" id="TileSet_wqyd6"]
 physics_layer_0/collision_layer = 1
@@ -27,12 +28,16 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(230, 25, 184, 25, 184, 
 [node name="Player" parent="." instance=ExtResource("3_mvg86")]
 position = Vector2(54, -78)
 
-[node name="Enemy" parent="." node_paths=PackedStringArray("player") instance=ExtResource("4_0rdht")]
-position = Vector2(-51, 9)
-player = NodePath("../Player")
+[node name="Enemy" parent="." node_paths=PackedStringArray("target") instance=ExtResource("4_0rdht")]
+position = Vector2(-51, 7)
 movement_speed = 50.0
 jump_deviation = 0.5
 jump_minimal_velocity = 0.75
+target = NodePath("../Player")
+visability_find_range = 200.0
+visability_lose_range = 400.0
+distancing_stop_range = 20.0
+distancing_giveup_range = 20.0
 
 [node name="TileMap" type="TileMap" parent="."]
 position = Vector2(24, 32)
