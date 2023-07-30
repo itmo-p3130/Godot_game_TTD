@@ -6,6 +6,7 @@ extends Node
 
 @export var jump_start_animation_name = "jump_start"
 @export var jump_end_animation_name = "jump_end"
+@export var double_jump_animation_name = "double_jump"
 
 
 var character : CharacterBody2D

@@ -1,22 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://dtf3kwj7mrjep"]
+[gd_scene load_steps=6 format=3 uid="uid://dtf3kwj7mrjep"]
 
-[ext_resource type="Texture2D" uid="uid://c3qb5s8jgv234" path="res://models/level/Slime.png" id="1_h3wwx"]
 [ext_resource type="PackedScene" uid="uid://p5i5hffyqs85" path="res://characters/player/player.tscn" id="3_mvg86"]
 [ext_resource type="PackedScene" uid="uid://ckqffyhe2nymg" path="res://characters/enemy/enemy.tscn" id="4_0rdht"]
 
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_aqd1j"]
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ep347"]
-texture = ExtResource("1_h3wwx")
-0:0/0 = 0
-0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-0:0/0/physics_layer_0/angular_velocity = 0.0
-0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_xhglt"]
 
 [sub_resource type="TileSet" id="TileSet_wqyd6"]
 physics_layer_0/collision_layer = 1
-physics_layer_0/physics_material = SubResource("PhysicsMaterial_aqd1j")
-sources/0 = SubResource("TileSetAtlasSource_ep347")
+physics_layer_0/physics_material = SubResource("PhysicsMaterial_xhglt")
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_tcai2"]
 vertices = PackedVector2Array(188, -31, 232, -27, 246, 11, 184, 11, 173, -17, 114, -47, 104, -78, 150, -78, 169, -41, -200, 59, -248, 59, -246, 0, -200, 43, -138, 43, -173, -3, -112, 18, 230, 25, 230, 75, 182, 75, 182, 59, 184, 25, 166, 59, 166, 43, 150, 43, 150, 27, 88, 14, 120, 27, 120, 43, 72, 43, 51, 35, 72, 59, 56, 59, -10, 40, 56, 75, -90, 75, -90, 59, -62, 36, -138, 59, 124, 1)
