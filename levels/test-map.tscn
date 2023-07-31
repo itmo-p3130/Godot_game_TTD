@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://vedb4hn000ww"]
+[gd_scene load_steps=11 format=3 uid="uid://vedb4hn000ww"]
 
-[ext_resource type="Texture2D" uid="uid://bn0cmkp20ypp2" path="res://models/level/Tile_NoTexture_Background.png" id="1_jqjjf"]
-[ext_resource type="Texture2D" uid="uid://co7oqppsns76r" path="res://models/level/Tile_NoTexture_Block.png" id="2_eda7o"]
+[ext_resource type="Texture2D" uid="uid://c4mh3rjvv4hle" path="res://models/level/Tile_NoTexture_Background.png" id="1_jqjjf"]
+[ext_resource type="Texture2D" uid="uid://befoe64rjnd3l" path="res://models/level/Tile_NoTexture_Block.png" id="2_eda7o"]
 [ext_resource type="PackedScene" uid="uid://p5i5hffyqs85" path="res://characters/player/player.tscn" id="3_w5nvq"]
 [ext_resource type="PackedScene" uid="uid://ckqffyhe2nymg" path="res://characters/enemy/enemy.tscn" id="4_7yop1"]
+[ext_resource type="Script" path="res://characters/enemy/flying_enemy.gd" id="5_kem40"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_icmmd"]
 
@@ -44,28 +45,37 @@ metadata/_edit_lock_ = true
 [node name="Player" parent="." instance=ExtResource("3_w5nvq")]
 position = Vector2(-22, 20)
 
-[node name="Enemy" parent="." node_paths=PackedStringArray("player") instance=ExtResource("4_7yop1")]
+[node name="Enemy" parent="." node_paths=PackedStringArray("target") instance=ExtResource("4_7yop1")]
 position = Vector2(-210, 158)
-player = NodePath("../Player")
-movement_speed = 50.0
+jump_speed = 400.0
 jump_deviation = 0.5
-jump_minimal_velocity = 0.75
+target = NodePath("../Player")
+visability_find_range = 200.0
+visability_lose_range = 400.0
+distancing_stop_range = 100.0
+distancing_not_moving_range = 0.5
+movement_speed = 50.0
 
-[node name="Enemy" parent="Enemy" node_paths=PackedStringArray("player", "navigation_agent") instance=ExtResource("4_7yop1")]
-position = Vector2(-103, -211)
-player = NodePath("../../Player")
-navigation_agent = NodePath("../NavigationAgent2D")
-movement_speed = 50.0
+[node name="Enemy2" parent="." node_paths=PackedStringArray("target", "navigation_agent") instance=ExtResource("4_7yop1")]
+position = Vector2(-351, -174)
+jump_speed = 400.0
 jump_deviation = 0.5
-jump_minimal_velocity = 0.75
+target = NodePath("../Player")
+navigation_agent = NodePath("../Enemy/NavigationAgent2D")
+visability_find_range = 200.0
+visability_lose_range = 400.0
+distancing_stop_range = 100.0
+distancing_not_moving_range = 0.5
+movement_speed = 50.0
 
-[node name="Enemy" parent="Enemy/Enemy" node_paths=PackedStringArray("player", "navigation_agent") instance=ExtResource("4_7yop1")]
-position = Vector2(-38, -121)
-player = NodePath("../../../Player")
-navigation_agent = NodePath("../../NavigationAgent2D")
+[node name="Enemy3" parent="." node_paths=PackedStringArray("target") instance=ExtResource("4_7yop1")]
+position = Vector2(-313, -53)
+script = ExtResource("5_kem40")
+target = NodePath("../Player")
+visability_find_range = 200.0
+visability_lose_range = 400.0
+distancing_can_fly = true
 movement_speed = 50.0
-jump_deviation = 0.5
-jump_minimal_velocity = 0.75
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 position = Vector2(-184, 372)
