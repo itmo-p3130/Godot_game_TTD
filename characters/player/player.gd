@@ -4,14 +4,15 @@ extends CharacterBody2D
 @export var jump_velocity : float = -350.0
 @export var double_jump_velocity : float = -300.0
 @export var double_jump_wait_time_sec : float = 1.5
+@export var jump_buffer_time : float = 0.1
 
 @onready var sprite : Sprite2D = $Sprite2D
 @onready var animation_tree : AnimationTree = $AnimationTree
 @onready var state_machine : CharacterStateMachine = $CharacterStateMachine
 
-# Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var direction : Vector2 = Vector2.ZERO
+var jump_buffer_timer : float = 0
 
 const LANDING_SPEED_FACTOR = 5
 
@@ -19,12 +20,9 @@ func _ready():
 	animation_tree.active = true
 
 func _physics_process(delta):
-	# Add the gravity.
 	if not is_on_floor():
 		velocity.y += gravity * delta
 
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
 	direction = Input.get_vector("left", "right", "up", "down")
 	if direction && state_machine.check_if_can_move():
 		velocity.x = direction.x * speed

@@ -15,7 +15,7 @@ func _on_double_jump_timeout():
 	can_double_jump = false
 
 func state_process(delta):
-	print(can_double_jump)
+	#print(can_double_jump)
 	if (character.is_on_floor()):
 		next_state = landing_state
 

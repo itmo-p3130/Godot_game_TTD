@@ -16,5 +16,6 @@ func jump():
 	next_state = air_state
 	#playback.travel(jump_start_animation_name)
 
-
-
+func on_enter():
+	if character.state_machine.jump_buffer_timer > 0:
+		jump()
