@@ -12,8 +12,11 @@ extends CharacterBody2D
 
 @export_category("Enemy distancing")
 @export var distancing_stop_range: float
-@export var distancing_giveup_range: float
+@export var distancing_not_moving_range: float
 @export var distancing_can_fly: bool
+
+@export_category("Enemy movement")
+@export var movement_speed: float
 
 
 var is_target_visible: bool
@@ -21,6 +24,8 @@ var is_target_reached: bool
 var is_target_reachable: bool
 
 var previous_position: Vector2
+
+var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 
 func set_target(new_target: Node2D) -> void:
@@ -75,6 +80,16 @@ func _physics_process(delta: float) -> void:
 		else:
 			target_unreachable_behavior(delta, target.global_position)
 
+	if not distancing_can_fly and not is_on_floor():
+		velocity.y += gravity * delta
+
+	if is_target_reached:
+		previous_position = Vector2(0, 0)
+	else:
+		previous_position = global_position
+
+	move_and_slide()
+
 
 func _navigation_actor_setup() -> void:
 	await get_tree().physics_frame
@@ -111,7 +126,11 @@ func _update_target_distancing() -> bool:
 
 func _update_target_reachability() -> bool:
 	var target_position = navigation_agent.target_position
+	var distance_to_previous = global_position.distance_to(previous_position)
 
 	is_target_reachable = true
+
+	if not is_target_reached and distance_to_previous < distancing_not_moving_range:
+		is_target_reachable = false
 
 	return is_target_reachable
