@@ -8,7 +8,7 @@ extends Enemy
 @export var jump_minimal_scaling_factor: float = 0.75
 
 
-func target_noticed_behavior(delta: float, checkpoint: Vector2) -> void:
+func target_noticed_behavior(_delta: float, checkpoint: Vector2) -> void:
 	# Finding distance to the target
 	var distance = checkpoint - global_position
 
@@ -26,7 +26,7 @@ func target_noticed_behavior(delta: float, checkpoint: Vector2) -> void:
 			velocity.y = _compute_jump_force(checkpoint)
 
 
-func target_unnoticed_behavior(delta: float, checkpoint: Vector2) -> void:
+func target_unnoticed_behavior(_delta: float, _checkpoint: Vector2) -> void:
 	pass
 
 
@@ -59,7 +59,6 @@ func _compute_angle_deviation(angle: float) -> float:
 
 func _compute_jump_force(point: Vector2) -> float:
 	var angle = _compute_angle(point)
-	var deviation = _compute_angle_deviation(angle)
 
 	# Finding appropriate jump force
 	var jump_scaling_factor = min(1, max(angle, jump_minimal_scaling_factor))
