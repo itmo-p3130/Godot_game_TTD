@@ -13,7 +13,6 @@ extends CharacterBody2D
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var direction : Vector2 = Vector2.ZERO
-var is_jumping = false
 
 const LANDING_SPEED_FACTOR = 5
 

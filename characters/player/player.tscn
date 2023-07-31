@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://p5i5hffyqs85"]
+[gd_scene load_steps=34 format=3 uid="uid://p5i5hffyqs85"]
 
 [ext_resource type="Script" path="res://characters/player/player.gd" id="1_dttdu"]
 [ext_resource type="Texture2D" uid="uid://bd8kbguta6ld7" path="res://models/player/Woodcutter_idle.png" id="2_f5ero"]
@@ -6,10 +6,11 @@
 [ext_resource type="Script" path="res://characters/character_state_machine.gd" id="3_uym7n"]
 [ext_resource type="Script" path="res://characters/player/ground_state.gd" id="4_d8gkr"]
 [ext_resource type="Texture2D" uid="uid://pyy52bduvga7" path="res://models/player/Woodcutter_jump.png" id="4_pxruy"]
-[ext_resource type="Script" path="res://characters/player/air_state.gd" id="5_ywbnm"]
 [ext_resource type="Script" path="res://characters/state.gd" id="6_dimlk"]
 [ext_resource type="Script" path="res://characters/player/landing_state.gd" id="6_g3pxe"]
 [ext_resource type="Script" path="res://characters/player/state_debug_label.gd" id="8_6vfwu"]
+[ext_resource type="Script" path="res://characters/player/falling_state.gd" id="9_j6b4b"]
+[ext_resource type="Script" path="res://characters/player/jumping_state.gd" id="10_rodet"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rsjcf"]
 size = Vector2(16, 32)
@@ -327,18 +328,33 @@ character = NodePath("..")
 current_state = NodePath("Ground")
 animation_tree = NodePath("../AnimationTree")
 
-[node name="Ground" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("air_state")]
+[node name="Ground" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("ground_state", "landing_state", "falling_state", "jumping_state")]
 script = ExtResource("4_d8gkr")
-air_state = NodePath("../Air")
+ground_state = NodePath(".")
+landing_state = NodePath("../Landing")
+falling_state = NodePath("../Falling")
+jumping_state = NodePath("../Jumping")
 
-[node name="Landing" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("ground_state")]
+[node name="Landing" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("ground_state", "landing_state", "falling_state", "jumping_state")]
 script = ExtResource("6_g3pxe")
 ground_state = NodePath("../Ground")
-can_move = false
+landing_state = NodePath(".")
+falling_state = NodePath("../Falling")
+jumping_state = NodePath("../Jumping")
 
-[node name="Air" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("landing_state")]
-script = ExtResource("5_ywbnm")
+[node name="Falling" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("ground_state", "landing_state", "falling_state", "jumping_state")]
+script = ExtResource("9_j6b4b")
+ground_state = NodePath("../Ground")
 landing_state = NodePath("../Landing")
+falling_state = NodePath(".")
+jumping_state = NodePath("../Jumping")
+
+[node name="Jumping" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("ground_state", "landing_state", "falling_state", "jumping_state")]
+script = ExtResource("10_rodet")
+ground_state = NodePath("../Ground")
+landing_state = NodePath("../Landing")
+falling_state = NodePath("../Falling")
+jumping_state = NodePath(".")
 
 [node name="StateDebugLabel" type="Label" parent="." node_paths=PackedStringArray("state_machine")]
 offset_left = -57.0
@@ -349,10 +365,10 @@ text = "State: "
 script = ExtResource("8_6vfwu")
 state_machine = NodePath("../CharacterStateMachine")
 
-[node name="AbstarctState" type="Node" parent="." node_paths=PackedStringArray("ground_state", "air_state", "landing_state")]
+[node name="AbstarctState" type="Node" parent="." node_paths=PackedStringArray("landing_state", "falling_state", "jumping_state")]
 script = ExtResource("6_dimlk")
-ground_state = NodePath("../CharacterStateMachine/Ground")
-air_state = NodePath("../CharacterStateMachine/Air")
 landing_state = NodePath("../CharacterStateMachine/Landing")
+falling_state = NodePath("../CharacterStateMachine/Falling")
+jumping_state = NodePath("../CharacterStateMachine/Jumping")
 
 [connection signal="animation_finished" from="AnimationTree" to="CharacterStateMachine/Landing" method="_on_animation_tree_animation_finished"]

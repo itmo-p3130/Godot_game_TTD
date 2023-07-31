@@ -2,8 +2,9 @@ class_name State
 extends Node
 
 @export var ground_state : State
-@export var air_state : State
 @export var landing_state : State
+@export var falling_state : State
+@export var jumping_state : State
 
 @export var can_move : bool = true
 

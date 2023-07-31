@@ -1,4 +1,4 @@
-class_name AirState
+class_name JumpingState
 extends State
 
 var can_double_jump = false
@@ -13,7 +13,6 @@ func _on_double_jump_timeout():
 	can_double_jump = false
 
 func state_process(delta):
-	#print(can_double_jump, character.is_jumping)
 	if character.is_on_floor():
 		next_state = landing_state
 
@@ -27,11 +26,10 @@ func on_exit():
 		playback.travel(jump_end_animation_name)
 
 func on_enter():
-	if character.is_jumping:
-		can_double_jump = true
-		playback.travel(jump_start_animation_name)
-		double_jump_timer.wait_time = character.double_jump_wait_time_sec
-		double_jump_timer.start()
+	can_double_jump = true
+	playback.travel(jump_start_animation_name)
+	double_jump_timer.wait_time = character.double_jump_wait_time_sec
+	double_jump_timer.start()
 
 func double_jump():
 	can_double_jump = false
