@@ -5,6 +5,7 @@ extends CharacterBody2D
 @export var double_jump_velocity : float = -300.0
 @export var double_jump_wait_time_sec : float = 1.5
 @export var jump_buffer_time : float = 0.1
+@export var coyote_time : float = 0.1
 
 @onready var sprite : Sprite2D = $Sprite2D
 @onready var animation_tree : AnimationTree = $AnimationTree
@@ -12,7 +13,6 @@ extends CharacterBody2D
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var direction : Vector2 = Vector2.ZERO
-var jump_buffer_timer : float = 0
 
 const LANDING_SPEED_FACTOR = 5
 

@@ -7,6 +7,7 @@ extends Node
 
 var states : Array[State]
 var jump_buffer_timer : float = 0
+var coyote_timer : float = 0
 
 func _process(delta):
 	if jump_buffer_timer > 0:

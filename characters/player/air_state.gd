@@ -1,8 +1,6 @@
 class_name AirState
 extends State
 
-@export var landing_state : State
-
 var can_double_jump = true
 var double_jump_timer = Timer.new()
 
