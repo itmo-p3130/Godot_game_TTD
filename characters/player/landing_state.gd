@@ -6,4 +6,5 @@ func _on_animation_tree_animation_finished(anim_name):
 		next_state = ground_state
 		
 func on_enter():
-	pass
+	character.is_jumping = false
+
