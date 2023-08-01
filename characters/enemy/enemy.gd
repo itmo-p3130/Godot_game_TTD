@@ -18,6 +18,7 @@ extends CharacterBody2D
 @export_category("Enemy movement")
 @export var movement_speed: float
 
+@onready var state_logger: Variant = get_node("/root/Main/State").logger
 
 var is_target_visible: bool
 var is_target_reached: bool
@@ -53,6 +54,7 @@ func _ready() -> void:
 	is_target_reached = false
 	is_target_reachable = false
 	previous_position = Vector2(0, 0)
+	state_logger.register(self)
 	call_deferred("_navigation_actor_setup")
 
 
@@ -89,6 +91,7 @@ func _physics_process(delta: float) -> void:
 		previous_position = global_position
 
 	move_and_slide()
+	state_logger.write_log(self)
 
 
 func _navigation_actor_setup() -> void:
@@ -125,7 +128,6 @@ func _update_target_distancing() -> bool:
 
 
 func _update_target_reachability() -> bool:
-	var target_position = navigation_agent.target_position
 	var distance_to_previous = global_position.distance_to(previous_position)
 
 	is_target_reachable = true
@@ -134,3 +136,16 @@ func _update_target_reachability() -> bool:
 		is_target_reachable = false
 
 	return is_target_reachable
+
+
+func get_save_data() -> Dictionary:
+	return {
+		"position": position,
+		"velocity": velocity
+	}
+
+
+func load_save_data(data: Dictionary) -> void:
+	position = data["position"]
+	velocity = data["velocity"]
+	move_and_slide()

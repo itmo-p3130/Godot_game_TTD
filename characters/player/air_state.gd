@@ -1,7 +1,7 @@
 class_name AirState
-extends State
+extends AnimationState
 
-@export var landing_state : State
+@export var landing_state : AnimationState
 
 var can_double_jump = true
 var double_jump_timer = Timer.new()
@@ -36,4 +36,4 @@ func double_jump():
 	character.velocity.y = character.double_jump_velocity
 	can_double_jump = false
 	playback.travel(double_jump_animation_name)
-	
+

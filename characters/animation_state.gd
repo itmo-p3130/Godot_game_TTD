@@ -1,4 +1,4 @@
-class_name State
+class_name AnimationState
 extends Node
 
 
@@ -10,7 +10,7 @@ extends Node
 
 
 var character : CharacterBody2D
-var next_state : State
+var next_state : AnimationState
 var playback : AnimationNodeStateMachinePlayback
 
 

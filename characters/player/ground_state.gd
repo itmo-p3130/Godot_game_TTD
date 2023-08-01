@@ -1,7 +1,7 @@
 class_name GroundState
-extends State
+extends AnimationState
 
-@export var air_state : State
+@export var air_state : AnimationState
 
 func state_process(delta):
 	if (!character.is_on_floor()):
@@ -10,7 +10,7 @@ func state_process(delta):
 func state_input(event : InputEvent):
 	if (event.is_action_pressed("jump")):
 		jump()
-		
+
 func jump():
 	character.velocity.y = character.jump_velocity
 	next_state = air_state
