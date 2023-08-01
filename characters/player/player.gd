@@ -5,7 +5,7 @@ extends CharacterBody2D
 @export var double_jump_velocity : float = -300.0
 @export var double_jump_wait_time_sec : float = 1.5
 @export var jump_buffer_time : float = 0.1
-@export var coyote_time : float = 0.1
+@export var coyote_time : float = 0.15
 
 @onready var sprite : Sprite2D = $Sprite2D
 @onready var animation_tree : AnimationTree = $AnimationTree
