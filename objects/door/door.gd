@@ -21,7 +21,7 @@ func set_trigger(new_trigger: Node2D) -> void:
 	trigger = new_trigger
 
 func get_trigger() -> bool:
-	if(typeof(trigger.get(switch_name)) == TYPE_BOOL):
+	if typeof(trigger.get(switch_name)) == TYPE_BOOL:
 		return trigger.get(switch_name)
 	return false
 
@@ -29,7 +29,7 @@ func _ready():
 	position = start_pos.position
 
 func _process(delta):
-	if(get_trigger()):
+	if get_trigger():
 		_direction = end_pos.position-position
 		move_to(delta, end_pos)
 	else:
@@ -37,19 +37,19 @@ func _process(delta):
 		move_to(delta, start_pos)
 	#position += move_speed * delta
 
-func setAnim(state: _State):
-	if(state == _State.idle):
+func setAnim(state: _State) -> void:
+	if state == _State.idle:
 		_sprite.animation = "idle"
-	elif (state == _State.moving):
+	elif state == _State.moving:
 		_sprite.animation = "moving"
 	else:
 		_sprite.animation = "idle"
 		print(get_name() + " : unknown _State error")
 		
-func move_to(delta:float, pos:Node2D):
-	if(position != pos.position):
-		_state=_State.moving
-		position += _direction.normalized()*delta*move_speed*10
+func move_to(delta:float, pos:Node2D) -> void:
+	if position != pos.position:
+		_state = _State.moving
+		position += _direction.normalized() * delta * move_speed * 10
 		return
-	else: _state=_State.idle
+	else: _state = _State.idle
 	setAnim(_state)
