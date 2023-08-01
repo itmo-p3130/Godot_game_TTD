@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://csg1i71kqxv1u"]
+
+[ext_resource type="Texture2D" uid="uid://br8d6ryyvjoho" path="res://models/level/Platform_01.png" id="1_adpto"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yjlu8"]
+size = Vector2(80, 30)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qq31f"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_adpto")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"moving",
+"speed": 5.0
+}]
+
+[node name="AnimatableBody2D" type="AnimatableBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_yjlu8")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_qq31f")
+animation = &"idle"

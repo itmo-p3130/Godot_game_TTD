@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://cjlbfi8ycy25n"]
+
+[ext_resource type="Texture2D" uid="uid://br8d6ryyvjoho" path="res://models/level/Platform_01.png" id="1_adpto"]
+
+[node name="Area2D" type="Area2D"]
+
+[node name="Platform01" type="Sprite2D" parent="."]
+scale = Vector2(1.76087, 1.02174)
+texture = ExtResource("1_adpto")
