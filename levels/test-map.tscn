@@ -1,12 +1,12 @@
-[gd_scene load_steps=14 format=3 uid="uid://vedb4hn000ww"]
+[gd_scene load_steps=13 format=3 uid="uid://vedb4hn000ww"]
 
 [ext_resource type="Texture2D" uid="uid://bn0cmkp20ypp2" path="res://models/level/Tile_NoTexture_Background.png" id="1_jqjjf"]
 [ext_resource type="Texture2D" uid="uid://co7oqppsns76r" path="res://models/level/Tile_NoTexture_Block.png" id="2_eda7o"]
 [ext_resource type="PackedScene" uid="uid://p5i5hffyqs85" path="res://characters/player/player.tscn" id="3_w5nvq"]
 [ext_resource type="PackedScene" uid="uid://ckqffyhe2nymg" path="res://characters/enemy/enemy.tscn" id="4_7yop1"]
 [ext_resource type="Script" path="res://characters/enemy/flying_enemy.gd" id="5_kem40"]
-[ext_resource type="PackedScene" uid="uid://csg1i71kqxv1u" path="res://objects/shell-door/shell_door.tscn" id="6_gh86v"]
-[ext_resource type="Script" path="res://objects/shell-door/shell_door.gd" id="7_deh88"]
+[ext_resource type="PackedScene" uid="uid://csg1i71kqxv1u" path="res://objects/door/door.tscn" id="6_gh86v"]
+[ext_resource type="Script" path="res://objects/door/door.gd" id="7_deh88"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_icmmd"]
 
@@ -35,8 +35,6 @@ sources/0 = SubResource("TileSetAtlasSource_0i0g1")
 vertices = PackedVector2Array(149, -466, 578, -322, 440, -180, -71, -180, -200, -468, -200, -180, -120, -179, -120, 14, -72, 11, 40, 12, 39, 28, -90, 59, -138, 59, -200, 59, -248, 60, -247, 12, -72, -116, -88, -116, -87, -102, -88, -20, 295, 28, 295, 59, -73, -4, -88, -4, -72, -101, -72, -20)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32Array(5, 4, 3, 6), PackedInt32Array(7, 8, 9, 10, 11, 12), PackedInt32Array(13, 14, 15, 7), PackedInt32Array(12, 13, 7), PackedInt32Array(6, 3, 16, 17), PackedInt32Array(7, 6, 17, 18, 19), PackedInt32Array(10, 20, 21, 11), PackedInt32Array(22, 8, 7, 23), PackedInt32Array(24, 25, 19, 18), PackedInt32Array(23, 7, 19)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(40, 12, -72, 11, -73, -4, -88, -4, -88, -20, -72, -20, -72, -101, -87, -102, -88, -116, -72, -116, -71, -180, 440, -180, 578, -322, 149, -466, -200, -468, -200, -180, -120, -179, -120, 14, -247, 12, -248, 60, -200, 59, -138, 59, -90, 59, 295, 59, 295, 28, 39, 28)])
-
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_u6qj4"]
 
 [node name="Node2D" type="Node2D"]
 
@@ -93,11 +91,12 @@ metadata/_edit_lock_ = true
 [node name="Shell door" parent="Door" node_paths=PackedStringArray("trigger", "start_pos", "end_pos") instance=ExtResource("6_gh86v")]
 position = Vector2(500, 50)
 disable_mode = 1
-physics_material_override = SubResource("PhysicsMaterial_u6qj4")
+collision_mask = 0
+motion_mode = 1
 script = ExtResource("7_deh88")
 trigger = NodePath("../../Player")
 switch_name = "metadata/door_open"
-move_speed = 50.0
+move_speed = 1.0
 start_pos = NodePath("../Start")
 end_pos = NodePath("../End")
 
@@ -105,4 +104,7 @@ end_pos = NodePath("../End")
 position = Vector2(439, 77)
 
 [node name="End" type="Node2D" parent="Door"]
-position = Vector2(-348, 81)
+position = Vector2(-236, 34)
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+lock_rotation = true
