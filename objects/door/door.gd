@@ -47,7 +47,8 @@ func setAnim(state: _State) -> void:
 	else:
 		_sprite.animation = "idle"
 		print(get_name() + " : unknown _State error")
-		
+	_sprite.set_speed_scale(anim_speed)
+	_sprite.play(_sprite.animation)
 func move_to(delta:float, pos:Node2D) -> void:
 	if position != pos.position:
 		_state = _State.moving
