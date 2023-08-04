@@ -1,0 +1,39 @@
+[gd_scene load_steps=5 format=3 uid="uid://csg1i71kqxv1u"]
+
+[ext_resource type="Texture2D" uid="uid://br8d6ryyvjoho" path="res://models/level/Platform_01.png" id="1_adpto"]
+[ext_resource type="Texture2D" uid="uid://co7oqppsns76r" path="res://models/level/Tile_NoTexture_Block.png" id="2_0chxx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tham6"]
+size = Vector2(80, 30)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_misbi"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_adpto")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_adpto")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_0chxx")
+}],
+"loop": true,
+"name": &"moving",
+"speed": 5.0
+}]
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_tham6")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_misbi")
+animation = &"moving"
