@@ -1,13 +1,13 @@
 [gd_scene load_steps=33 format=3 uid="uid://p5i5hffyqs85"]
 
 [ext_resource type="Script" path="res://characters/player/player.gd" id="1_dttdu"]
-[ext_resource type="Texture2D" uid="uid://ci783p582xxmk" path="res://models/player/Woodcutter_idle.png" id="2_f5ero"]
-[ext_resource type="Texture2D" uid="uid://47lla5tkyfbx" path="res://models/player/Woodcutter_run.png" id="2_n22hm"]
+[ext_resource type="Texture2D" uid="uid://cr0be5vq27fww" path="res://models/player/Woodcutter_idle.png" id="2_f5ero"]
+[ext_resource type="Texture2D" uid="uid://c8v0ie16o3h07" path="res://models/player/Woodcutter_run.png" id="2_n22hm"]
 [ext_resource type="Script" path="res://characters/character_state_machine.gd" id="3_uym7n"]
 [ext_resource type="Script" path="res://characters/player/ground_state.gd" id="4_d8gkr"]
-[ext_resource type="Texture2D" uid="uid://j5mq3cs5hxjo" path="res://models/player/Woodcutter_jump.png" id="4_pxruy"]
+[ext_resource type="Texture2D" uid="uid://btirq5p6vfcy8" path="res://models/player/Woodcutter_jump.png" id="4_pxruy"]
 [ext_resource type="Script" path="res://characters/player/air_state.gd" id="5_ywbnm"]
-[ext_resource type="Script" path="res://characters/state.gd" id="6_dimlk"]
+[ext_resource type="Script" path="res://characters/animation_state.gd" id="6_dimlk"]
 [ext_resource type="Script" path="res://characters/player/landing_state.gd" id="6_g3pxe"]
 [ext_resource type="Script" path="res://characters/player/state_debug_label.gd" id="8_6vfwu"]
 
