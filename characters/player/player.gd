@@ -8,6 +8,7 @@ extends CharacterBody2D
 @export var coyote_time : float = 0.15
 @export var puss_off_ledges_x_offset : float = 7
 @export var landing_speed_factor : float = 5000000
+@export var fall_gravity_multiplier : float = 1.6
 
 @onready var sprite : Sprite2D = $Sprite2D
 @onready var animation_tree : AnimationTree = $AnimationTree
@@ -27,7 +28,8 @@ func _ready():
 
 func _physics_process(delta):
 	if not is_on_floor():
-		velocity.y += gravity * delta
+		velocity.y += gravity * delta * \
+		(fall_gravity_multiplier if velocity.y > 0 else 1.0)
 
 	direction = Input.get_vector("left", "right", "up", "down")
 	if direction && state_machine.check_if_can_move():
