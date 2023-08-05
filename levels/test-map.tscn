@@ -1,14 +1,14 @@
-[gd_scene load_steps=13 format=3 uid="uid://vedb4hn000ww"]
+[gd_scene load_steps=15 format=3 uid="uid://vedb4hn000ww"]
 
-[ext_resource type="Texture2D" uid="uid://bb8csdaq1bh8" path="res://models/level/Tile_NoTexture_Background.png" id="1_jqjjf"]
-[ext_resource type="Texture2D" uid="uid://do6w0i4vpfxvb" path="res://models/level/Tile_NoTexture_Block.png" id="2_eda7o"]
+[ext_resource type="Texture2D" uid="uid://bh7x7cahm4t2i" path="res://models/level/Tile_NoTexture_Background.png" id="1_jqjjf"]
+[ext_resource type="Texture2D" uid="uid://c3ausd5vk6ff5" path="res://models/level/Tile_NoTexture_Block.png" id="2_eda7o"]
 [ext_resource type="PackedScene" uid="uid://p5i5hffyqs85" path="res://characters/player/player.tscn" id="3_w5nvq"]
 [ext_resource type="PackedScene" uid="uid://ckqffyhe2nymg" path="res://characters/enemy/enemy.tscn" id="4_7yop1"]
 [ext_resource type="Script" path="res://characters/enemy/flying_enemy.gd" id="5_kem40"]
-[ext_resource type="Script" path="res://state/state.gd" id="6_h4e00"]
-[ext_resource type="Script" path="res://devices/device.gd" id="7_fgkuw"]
 [ext_resource type="PackedScene" uid="uid://csg1i71kqxv1u" path="res://objects/door/door.tscn" id="6_gh86v"]
+[ext_resource type="Script" path="res://state/state.gd" id="6_h4e00"]
 [ext_resource type="Script" path="res://objects/door/door.gd" id="7_deh88"]
+[ext_resource type="Script" path="res://devices/device.gd" id="7_fgkuw"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_icmmd"]
 
@@ -105,6 +105,7 @@ motion_mode = 1
 script = ExtResource("7_deh88")
 trigger = NodePath("../../Player")
 switch_name = "metadata/door_open"
+anim_speed = 1.0
 move_speed = 1.0
 start_pos = NodePath("../Start")
 end_pos = NodePath("../End")
