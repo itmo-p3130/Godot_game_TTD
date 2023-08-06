@@ -6,7 +6,11 @@ extends Node
 @export var animation_tree : AnimationTree
 
 var states : Array[AnimationState]
+var jump_buffer_timer : float = 0
 
+func _process(delta):
+	if jump_buffer_timer > 0:
+		jump_buffer_timer -= delta
 
 func _ready():
 	for child_state in get_children():
@@ -23,6 +27,8 @@ func _physics_process(delta):
 	current_state.state_process(delta)
 
 func _input(event : InputEvent):
+	if Input.is_action_just_pressed("jump"):
+		jump_buffer_timer = character.jump_buffer_time
 	current_state.state_input(event)
 
 func check_if_can_move():

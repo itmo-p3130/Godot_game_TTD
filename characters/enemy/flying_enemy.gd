@@ -23,5 +23,5 @@ func target_reached_behavior(_delta: float, _checkpoint: Vector2) -> void:
 	pass
 
 
-func target_unreachable_behavior(_delta: float, checkpoint: Vector2) -> void:
+func target_unreachable_behavior(_delta: float, _checkpoint: Vector2) -> void:
 	pass

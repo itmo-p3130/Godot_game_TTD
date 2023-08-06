@@ -1,9 +1,7 @@
 class_name AirState
 extends AnimationState
 
-@export var landing_state : AnimationState
-
-var can_double_jump = true
+var can_double_jump = false
 var double_jump_timer = Timer.new()
 
 func _ready():
@@ -14,8 +12,8 @@ func _ready():
 func _on_double_jump_timeout():
 	can_double_jump = false
 
-func state_process(delta):
-	if (character.is_on_floor()):
+func state_process(_delta):
+	if character.is_on_floor():
 		next_state = landing_state
 
 func state_input(event : InputEvent):
@@ -23,6 +21,7 @@ func state_input(event : InputEvent):
 		double_jump()
 
 func on_exit():
+	can_double_jump = false
 	if (next_state == landing_state):
 		playback.travel(jump_end_animation_name)
 
@@ -33,7 +32,7 @@ func on_enter():
 	double_jump_timer.start()
 
 func double_jump():
-	character.velocity.y = character.double_jump_velocity
 	can_double_jump = false
+	character.velocity.y = character.double_jump_velocity
 	playback.travel(double_jump_animation_name)
 
